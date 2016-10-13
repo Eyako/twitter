@@ -1,6 +1,9 @@
 class StaticPagesController < ApplicationController
   def home
-    @micropost = current_user.microposts.build if logged_in?
-    # Micropost.new(user_id: current_user.id)
+    if logged_in?
+      @micropost = current_user.microposts.build
+      # Micropost.new(user_id: current_user.id)
+      @feed_items = current_user.feed_items.includes(:user).order(created_at: :desc)
+    end
   end
 end

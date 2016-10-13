@@ -5,7 +5,18 @@ Rails.application.routes.draw do
   post   'login' , to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
 
-  resources :users
+
+  resources :users do
+    member do
+      get :followings, :followers
+    end
+  end
+  
+   # likeアクションへのルーティングを定義してください
+  post '/like/:micropost_id' => 'favorites#like', as: 'like'
+  
+  delete '/unlike/:micropost_id' => 'favorites#unlike', as: 'unlike'
+  
   resources :microposts
   resources :relationships, only: [:create, :destroy]
 

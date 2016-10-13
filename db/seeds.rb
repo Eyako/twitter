@@ -11,14 +11,12 @@
   u.save!(validate: false)
 end
 
-Relationship.create(follower_id: 1, followed_id: 2)
-Relationship.create(follower_id: 1, followed_id: 3)
-Relationship.create(follower_id: 1, followed_id: 4)
-Relationship.create(follower_id: 2, followed_id: 1)
-Relationship.create(follower_id: 3, followed_id: 1)
+u = User.new(name: "kaminari", email: "kaminari@example.com")
+  u.password = 'kaminari'
+  u.save!(validate: false)
 
-# (1..20).each do |i|
-#     u = User.find(i)
-#     u2= User.find(i+1)
-#     u.follow(u2)
-#   end
+1000.times do |i|
+   k = User.find(u.id)
+   micropost = k.microposts.build(content: "コメント#{i}")
+   micropost.save
+end

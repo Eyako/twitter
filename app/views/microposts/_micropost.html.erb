@@ -8,5 +8,11 @@
       <%= link_to "delete", micropost, method: :delete,
                                        data: { confirm: "本当に削除しますか？" } %>
     <% end %>
+  <% if current_user.favarites.find_by( micropost_id: micropost.id )  %>
+     <%= link_to 'いいね！を取り消す', unlike_path(micropost.id), method: :delete %>
+  <% else %>
+    <%= link_to 'いいね！', like_path(micropost.id), method: :post %>
+  <% end %>
   </span>
 </li>
+

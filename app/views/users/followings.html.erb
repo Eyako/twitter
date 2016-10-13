@@ -31,11 +31,10 @@
     </div>
   </aside>
   <div class="col-md-4">
-    <%= render 'follow_form' if logged_in? %>
-    <% if @user.microposts.any? %>
-      <h3>Microposts (<%= @user.microposts.count %>)</h3>
+    <h3>Followings (<%= @user.following_users.count %>)</h3>
+    <% if @users.any? %>
       <ol class="microposts">
-        <%= render @microposts %>
+        <%= render @users %>
       </ol>
     <% end %>
   </div>

@@ -27,6 +27,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'hirb'
+gem 'hirb-unicode'
+# gem 'pry-debugger’ # エラーが出てインストールできず・・・深くは調べていません
+
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

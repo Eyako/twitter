@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
    before_action :me?, only: [:edit, :update]
    before_action :logged_in_user, only: [:show]
+   before_action :set_params, only: [:show, :edit, :update, :followings, :followers]
   
   def show
     @user = User.find(params[:id])
@@ -22,11 +23,11 @@ class UsersController < ApplicationController
   end
   
   def edit
-    @user = User.find(params[:id])
+   
   end
   
   def update
-    @user = User.find(params[:id])
+   
     if @user.update_attributes(user_params)
       flash[:info] = 'Profileを更新しました。'
       redirect_to @user
@@ -35,8 +36,16 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
+  
+  def followings
+    @users = @user.following_users
+  end
+  
+  def followers
+    @users = @user.follower_users
+  end
 
-  private
+private
 
   def user_params
     params.require(:user).permit(:name, :email, :password,
@@ -48,6 +57,10 @@ class UsersController < ApplicationController
     if current_user != @user
       redirect_to root_path
     end
+  end
+  
+  def set_params
+    @user = User.find(params[:id])
   end
   
 end
